@@ -26,3 +26,36 @@ stages:
       md5: b997e5f5a0af00b02bbe33baa787fe85.dir
       size: 82039
       nfiles: 4
+  train-linear-regression:
+    cmd: python scripts/train_model.py
+    deps:
+    - path: assets/features/train_features.csv
+      md5: fb1e380a2e12d6b0ae39cc77474c5e85
+      size: 52984
+    - path: assets/features/train_labels.csv
+      md5: 9f855a6bafbd146454af35ba4a357f93
+      size: 12451
+    outs:
+    - path: assets/models
+      md5: 83d24339dc67d6d782c513732e1f8388.dir
+      size: 716
+      nfiles: 1
+  evaluate-model:
+    cmd: python scripts/eval_model.py
+    deps:
+    - path: assets/features/test_features.csv
+      md5: 485aaa36029efaedee2c3ff068a13c44
+      size: 13465
+    - path: assets/features/test_labels.csv
+      md5: a27f0ae650e06651473a160ab18c77a2
+      size: 3139
+    - path: assets/models/model.pk
+      md5: 1831b6770d21ee482490933cbd4a589d
+      size: 716
+    - path: scripts/eval_model.py
+      md5: e6f30da47bd12b44a1a637254f0baf1e
+      size: 755
+    outs:
+    - path: assets/metrics.json
+      md5: 792384afb214be31334dfca5fbc4bb7c
+      size: 87
